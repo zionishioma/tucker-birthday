@@ -10,73 +10,118 @@
       padding: 0;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-align: center;
       color: #333;
     }
     .card {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem 1.5rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       max-width: 90%;
-      width: 350px;
-      margin: 20px;
-      animation: popIn 0.8s ease-out;
+      width: 340px;
+      margin: 15px;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .active {
+      display: block;
+    }
+    .profile-img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 15px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     h1 {
-      color: #ff4757;
-      font-size: 2.2rem;
+      color: #2e86de;
+      font-size: 1.8rem;
       margin-bottom: 10px;
     }
     p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       line-height: 1.6;
       color: #555;
     }
-    .balloon {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      animation: float 2s ease-in-out infinite alternate;
-    }
-    button {
+    .nav-buttons {
+      display: flex;
+      justify-content: space-around;
+      gap: 6px;
       margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 1rem;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 10px 8px;
+      font-size: 0.85rem;
       font-weight: bold;
       color: white;
-      background-color: #ff4757;
+      background-color: #2e86de;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-      transition: transform 0.2s;
+      box-shadow: 0 4px 10px rgba(46, 134, 222, 0.3);
     }
-    button:active {
-      transform: scale(0.95);
+    .nav-btn:active {
+      transform: scale(0.96);
     }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-15px); }
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <div class="balloon">🎈🎂🎉</div>
-    <h1>Happy Birthday, Tucker!</h1>
-    <p>Wishing you the happiest of birthdays today! May your year ahead be full of fun, happiness, and incredible memories.</p>
-    <button onclick="alert('🎂 Have an amazing day!')">Tap for a surprise! 🎉</button>
+    
+    <!-- PAGE 1: Welcome -->
+    <div id="page1" class="page active">
+      <div style="font-size: 3rem;">🎈🎉🎂</div>
+      <h1>Happy Birthday, Tucker!</h1>
+      <p>Welcome to your custom birthday page! Tap the buttons below to switch pages and explore.</p>
+    </div>
+
+    <!-- PAGE 2: Photo Memory -->
+    <div id="page2" class="page">
+      <h1>Memories</h1>
+      <img src="IMG_4587.jpeg" alt="Tucker Photo" class="profile-img">
+      <p>Wishing you another year filled with great moments and good times!</p>
+    </div>
+
+    <!-- PAGE 3: Special Message -->
+    <div id="page3" class="page">
+      <div style="font-size: 3rem;">🎁✨</div>
+      <h1>Best Wishes</h1>
+      <p>May this upcoming year bring you success, laughter, and everything you've been working toward!</p>
+      <button onclick="alert('🎉 Have an amazing birthday, Tucker!')" class="nav-btn" style="background: #10ac84; width: 100%; margin-top: 15px;">Tap for Surprise! 🎊</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="showPage('page1')">Welcome</button>
+      <button class="nav-btn" onclick="showPage('page2')">Photo</button>
+      <button class="nav-btn" onclick="showPage('page3')">Wishes</button>
+    </div>
+
   </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
-
